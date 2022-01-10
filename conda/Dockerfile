@@ -5,7 +5,8 @@ ARG CONDA_VER=2021.11
 ARG PYTHON_VERSION=3.8
 
 RUN apt update && \
-    apt install dumb-init supervisor tzdata -y && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt install -y dumb-init supervisor tzdata && \
     cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
 
