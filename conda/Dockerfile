@@ -1,0 +1,25 @@
+ARG FORM_IMAME=nvidia/cuda:11.4.2-cudnn8-devel-ubuntu18.04
+FROM ${FORM_IMAME}
+
+ARG CONDA_VER=2021.11
+ARG PYTHON_VERSION=3.8
+
+RUN apt update && \
+    apt install dumb-init supervisor -y && \
+    cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+
+#RUN wget -c http://mirrors.aliyun.com/anaconda/archive/Anaconda3-${CONDA_VER}-Linux-x86_64.sh && \
+RUN wget -c https://repo.anaconda.com/archive/Anaconda3-${CONDA_VER}-Linux-x86_64.sh && \
+    bash Anaconda3-${CONDA_VER}-Linux-x86_64.sh -b -p /opt/conda && \
+    rm -rf Anaconda3-${CONDA_VER}-Linux-x86_64.sh && \
+    echo "export PATH=/opt/conda/bin:$PATH" >> /root/.profile && \
+    /opt/conda/bin/conda update -n base -c defaults conda -y && /opt/conda/bin/conda update --all -y && \
+    /opt/conda/bin/conda install python=${PYTHON_VERSION} pip cudatoolkit -y && \
+    /opt/conda/bin/conda clean -ya && \
+    /opt/conda/bin/python -m pip install --no-cache-dir jupyterlab tensorboard opencv-contrib-python
+
+ADD supervisor /etc/supervisor/conf.d/
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["bash", "-c", "/usr/local/bin/entrypoint.sh"]
