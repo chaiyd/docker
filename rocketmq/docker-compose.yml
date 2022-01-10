@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    rocketmq-broker:
+        image: chaiyd/rocketmq:broker-4.8.0
+        ports:
+            - 10911:10911
+        depends_on:
+            - rocketmq-namesrv
+        environment:
+            ROCKETMQ_ADDR: rocketmq-namesrv:9876
+        restart: always
+
+    rocketmq-namesrv:
+        image: chaiyd/rocketmq:namesrv-4.8.0
+        ports:
+            - 9876:9876
+        restart: always

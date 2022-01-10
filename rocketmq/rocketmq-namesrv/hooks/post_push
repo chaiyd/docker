@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+docker tag $IMAGE_NAME $DOCKER_REPO:namesrv
+docker tag $IMAGE_NAME $DOCKER_REPO:namesrv-4.8.0
+docker tag $IMAGE_NAME $DOCKER_REPO:rocketmq-namesrv-4.8.0
+docker push $DOCKER_REPO:namesrv
+docker push $DOCKER_REPO:namesrv-4.8.0
+docker push $DOCKER_REPO:rocketmq-namesrv-4.8.0

@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+  openldap:
+    container_name: openldap
+    image: osixia/openldap:1.5.0
+    restart: always
+    volumes:
+      - /data/docker/openldap/data/ldap:/var/lib/ldap
+      - /data/docker/openldap/data/slapd.d:/etc/ldap/slapd.d
+    ports:
+      - "389:389"
+      - "636:636"
+    environment:
+      - LDAP_ORGANISATION=baidu
+      - LDAP_DOMAIN=baidu.com
+      - LDAP_ADMIN_PASSWORD=asdasdasd
+      - LDAP_READONLY_USER=false
+      #- LDAP_READONLY_USER_USERNAME=readonly
+      #- LDAP_READONLY_USER_PASSWORD=readonly
+
+  # ldap 管理页面
+  phpldapadmin :
+    container_name: phpldapadmin
+    image: osixia/phpldapadmin:0.9.0
+    restart: always
+    depends_on:
+      - openldap
+    #volumes:
+    #  - /data/docker/openldap/phpldapadmin:/container/service/phpldapadmin/assets/config
+    #  - /data/docker/openldap/database:/var/lib/ldap
+    ports:
+      - "9081:80"
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=openldap
+      - PHPLDAPADMIN_HTTPS=false
+
+  # 自助密码服务
+  self-service-password:
+    container_name: self-service-password
+    image: tiredofit/self-service-password:5.1.2
+    restart: always
+    depends_on:
+      - openldap
+    #volumes:
+    #  - /data/docker/openldap/ssp/data:/www/ssp
+    ports:
+      - "9082:80"
+    environment:
+      - LDAP_SERVER=openldap
+      - LDAP_STARTTLS=false
+      - LDAP_BINDDN=cn=admin,dc=baidu,dc=com
+      - LDAP_BINDPASS=asdasdasd
+      - LDAP_BASE_SEARCH=dc=baidu,dc=com
+      - MAIL_FROM_NAME=统一认证服务
+      - MAIL_FROM=devops@baidu.com
+      - MAIL_SIGNATURE=\n\n\n欢迎使用统一认证服务~~
+      - NOTIFY_ON_CHANGE=true
+      - SMTP_AUTH_ON=true
+      - SMTP_AUTOTLS=true
+      - SMTP_HOST=smtp.exmail.qq.com
+      - SMTP_SECURE_TYPE=ssl
+      - SMTP_PORT=465
+      - SMTP_USER=devops@baidu.com
+      - SMTP_PASS=
+      - IS_BEHIND_PROXY=true
+      - SITE_URL=http://192.168.6.121:9082/

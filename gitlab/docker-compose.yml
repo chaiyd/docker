@@ -1,0 +1,61 @@
+version: "3"
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:13.10.0-ce.0
+    container_name: gitlab
+    restart: always
+    hostname: 192.168.6.121:9083
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://192.168.6.121:9082'
+        gitlab_rails['time_zone'] = 'Asia/Shanghai'
+        gitlab_rails['gitlab_shell_ssh_port'] = 10022
+        gitlab_rails['ldap_enabled'] = true
+        gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
+          main:
+            label: 'LDAP'
+            host: '192.168.6.121'
+            port: 389
+            uid: 'uid'
+            bind_dn: 'cn=admin,dc=baidu,dc=com'
+            password: 'asdasdasd'
+            encryption: 'plain'
+            active_directory: false
+            allow_username_or_email_login: true
+            lowercase_usernames: false 
+            block_auto_created_users: false
+            base: 'cn=dev,dc=baidu,dc=com'
+            user_filter: ''
+            group_base: ''
+            admin_group: ''
+            sync_ssh_keys: false
+        EOS
+
+        gitlab_rails['smtp_enable'] = true
+        gitlab_rails['smtp_address'] = "smtp.exmail.qq.com"
+        gitlab_rails['smtp_port'] = 465
+        gitlab_rails['smtp_user_name'] = "devops@qq.com"
+        gitlab_rails['smtp_password'] = "asdasdasd"
+        gitlab_rails['smtp_domain'] = "exmail.qq.com"
+        gitlab_rails['smtp_authentication'] = "login"
+        gitlab_rails['smtp_enable_starttls_auto'] = true
+        gitlab_rails['smtp_tls'] = true
+        gitlab_rails['gitlab_email_from'] = 'devops@qq.com'
+        nginx['enable'] = true
+        nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+        nginx['proxy_set_headers'] = {
+          "Host" => "$$http_host",
+          "X-Real-IP" => "$$remote_addr",
+          "X-Forwarded-For" => "$$proxy_add_x_forwarded_for",
+          "X-Forwarded-Proto" => "http"
+        }
+    ports:
+      - 9083:80
+      #- 10443:443
+      #- 10022:22
+    volumes:
+      - /data/docker/gitlab/data/config:/etc/gitlab
+      - /data/docker/gitlab/data/logs:/var/log/gitlab
+      - /data/docker/gitlab/data/data:/var/opt/gitlab

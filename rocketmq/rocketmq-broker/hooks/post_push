@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+docker tag $IMAGE_NAME $DOCKER_REPO:broker
+docker tag $IMAGE_NAME $DOCKER_REPO:broker-4.8.0
+docker tag $IMAGE_NAME $DOCKER_REPO:rocketmq-broker-4.8.0
+docker push $DOCKER_REPO:broker
+docker push $DOCKER_REPO:broker-4.8.0
+docker push $DOCKER_REPO:rocketmq-broker-4.8.0

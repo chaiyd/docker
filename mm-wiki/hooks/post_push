@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker tag $IMAGE_NAME $DOCKER_REPO:0.2.3
+docker push $DOCKER_REPO:0.2.3
