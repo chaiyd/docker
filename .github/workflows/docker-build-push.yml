@@ -43,6 +43,6 @@ jobs:
           file: ./conda/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: cuda11.4.2-cudnn8-devel-ubuntu18.04
-          labels: cuda11.4.2-cudnn8-devel-ubuntu18.04
+          tags: chaiyd/conda:cuda11.4.2-cudnn8-devel-ubuntu18.04
+          labels: chaiyd/conda:cuda11.4.2-cudnn8-devel-ubuntu18.04
 
