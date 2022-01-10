@@ -44,5 +44,5 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: cuda11.4.2-cudnn8-devel-ubuntu18.04
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: cuda11.4.2-cudnn8-devel-ubuntu18.04
 
