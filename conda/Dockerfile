@@ -6,7 +6,7 @@ ARG PYTHON_VERSION=3.8
 
 RUN apt update && \
     export DEBIAN_FRONTEND=noninteractive && \
-    apt install -y dumb-init supervisor tzdata && \
+    apt install -y dumb-init supervisor tzdata wget && \
     cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
 
