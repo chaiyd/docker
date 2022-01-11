@@ -20,6 +20,8 @@ RUN wget -c https://repo.anaconda.com/archive/Anaconda3-${CONDA_VER}-Linux-x86_6
     /opt/conda/bin/conda clean -ya && \
     /opt/conda/bin/python -m pip install --no-cache-dir jupyterlab tensorboard opencv-contrib-python
 
+ENV PATH /opt/conda/bin:$PATH
+
 ADD supervisor /etc/supervisor/conf.d/
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
