@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  CUDA_VER: '11.5.1-cudnn8-devel'
+  CONDA_VER: '2021.11'
+  PYTHON_VER: '3.8'
+
 jobs:
   push_to_registries:
     name: Push Docker image to multiple registries
@@ -43,8 +48,12 @@ jobs:
           file: ./conda/ubuntu18.04/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: chaiyd/conda:cuda11.4.2-cudnn8-devel-ubuntu18.04
-          labels: chaiyd/conda:cuda11.4.2-cudnn8-devel-ubuntu18.04
+          build-args: |
+            CUDA_VER=${{ env.CUDA_VER }}
+            CONDA_VER=${{ env.CONDA_VER }}
+            PYTHON_VER=${{ env.PYTHON_VER}}
+          tags: chaiyd/conda:${{ env.CUDA_VER }}-ubuntu18.04
+          labels: chaiyd/conda:${{ env.CUDA_VER }}-ubuntu18.04
 
       - name: Build and push Docker images && ubuntu20.04
         uses: docker/build-push-action@v2
@@ -53,6 +62,6 @@ jobs:
           file: ./conda/ubuntu20.04/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: chaiyd/conda:cuda11.4.2-cudnn8-devel-ubuntu20.04
-          labels: chaiyd/conda:cuda11.4.2-cudnn8-devel-ubuntu20.04
+          tags: chaiyd/conda:${{ env.CUDA_VER }}-ubuntu20.04
+          labels: chaiyd/conda:${{ env.CUDA_VER }}-ubuntu20.04
 
