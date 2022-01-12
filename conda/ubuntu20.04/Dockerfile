@@ -23,6 +23,8 @@ RUN wget -c https://repo.anaconda.com/archive/Anaconda3-${CONDA_VER}-Linux-x86_6
 ENV PATH /opt/conda/bin:$PATH
 
 ADD supervisor /etc/supervisor/conf.d/
+ADD entrypoint.sh  /usr/local/bin/e
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["bash", "-c", "/usr/local/bin/entrypoint.sh"]
