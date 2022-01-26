@@ -66,7 +66,7 @@ certbot certonly -a certbot-dns-aliyun:dns-aliyun \
 ## docker run 
 ```
 docker run -it --rm --name certbot \
-            -v "/root/certbot/etsencrypt:/etc/letsencrypt" \
+            -v "/root/certbot/letsencrypt:/etc/letsencrypt" \
             -v "/root/certbot/lib/letsencrypt:/var/lib/letsencrypt" \
             -v "/root/certbot/alidns.ini:/alidns.ini:ro" \
             chaiyd/certbot:aliyundns certonly \
