@@ -98,3 +98,11 @@ services:
     - centos
 - tomcat-alpine
     - alpine
+
+
+## 赞助
+- 你的支持是我坚持下去的动力。
+
+  ![alipay](https://github.com/chaiyd/images/blob/main/pay/alipay.jpg) | ![wechat](https://github.com/chaiyd/images/blob/main/pay/wechatpay.jpg)
+  ---|---
+
