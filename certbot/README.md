@@ -74,3 +74,8 @@ docker run -it --rm --name certbot \
             --certbot-dns-aliyun:dns-aliyun-credentials /alidns.ini \
             -d "*.vl.xyz"
 ```
+
+## crontab
+```
+0 6 * * * docker run -it --rm --name certbot -v "/root/certbot/letsencrypt:/etc/letsencrypt" -v "/root/certbot/alidns.ini:/alidns.ini:ro" chaiyd/certbot:alidns renew --dry-run
+```
