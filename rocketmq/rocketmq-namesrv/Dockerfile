@@ -7,10 +7,10 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 ARG ROCKETMQ_VER=4.8.0
 ARG ROCKETMQ_NAME=rocketmq-all-$ROCKETMQ_VER-bin-release
-ARG ROCKETMQ_URL=https://downloads.apache.org/rocketmq/$ROCKETMQ_VER/$ROCKETMQ_NAME.zip
+ARG ROCKETMQ_URL=https://downloads.apache.org/rocketmq/${ROCKETMQ_VER}/${ROCKETMQ_NAME}.zip
 
-RUN wget -c $ROCKETMQ_URL && \
-    unzip $ROCKETMQ_NAME.zip -d /opt
+RUN wget -c ${ROCKETMQ_URL} && \
+    unzip ${ROCKETMQ_NAME}.zip -d /opt
 
 
 FROM mcr.microsoft.com/java/jdk:8-zulu-alpine
@@ -27,7 +27,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone
 
-COPY --from=builder /opt/$ROCKETMQ_NAME /opt/rocketmq
+#COPY --from=builder /opt/$ROCKETMQ_NAME /opt/rocketmq
+COPY --from=builder /opt/rocketmq-${ROCKETMQ_VER} /opt/rocketmq
 ADD start.sh /opt/rocketmq
 RUN chmod +x /opt/rocketmq/start.sh
 
