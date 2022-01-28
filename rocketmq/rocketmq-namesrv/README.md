@@ -10,11 +10,11 @@ Apache RocketMQ™ is a unified messaging engine, lightweight data processing pl
 - 使用官方默认配置，未做任何更改
 
 ## TAG
-- [rocketmq, rocketmq-4.8.0](https://github.com/chaiyd/docker/tree/master/rocketmq)
-  - 镜像默认包含mqnamesrv，broker  
-- [rocketmq-mqnamesrv, rocketmq-mqnamesrv-4.8.0, mqnamesrv-4.8.0](https://github.com/chaiyd/docker/tree/master/rocketmq-mqnamesrv)
+- [4.9.2,rocketmq, rocketmq-4.9.2](https://github.com/chaiyd/docker/tree/master/rocketmq)
+  - 镜像默认包含mqnamesrv，broker
+- [rocketmq-mqnamesrv, rocketmq-mqnamesrv-4.9.2, mqnamesrv-4.9.2](https://github.com/chaiyd/docker/tree/master/rocketmq-mqnamesrv)
   - 仅包含mqnamesrv
-- [rocketmq-broker, rocketmq-broker-4.8.0, broker-4.8.0](https://github.com/chaiyd/docker/tree/master/rocketmq-broker)
+- [rocketmq-broker, rocketmq-broker-4.9.2, broker-4.9.2](https://github.com/chaiyd/docker/tree/master/rocketmq-broker)
   - 仅包含broker
   - 单独使用broker-tag请一定要传入ROCKETMQ_ADDR
   - ```ROCKETMQ_ADDR=localhost:9876```
