@@ -56,8 +56,8 @@ jobs:
       - name: Build and push Docker image for rocketmq-broker
         uses: docker/build-push-action@v2
         with:
-          context: ./rocketmq-broker
-          file: ./rocketmq-broker/Dockerfile
+          context: ./rocketmq/rocketmq-broker
+          file: ./rocketmq/rocketmq-broker/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
@@ -70,8 +70,8 @@ jobs:
       - name: Build and push Docker image for rocketmq-namesrv
         uses: docker/build-push-action@v2
         with:
-          context: ./rocketmq-namesrv
-          file: ./rocketmq-namesrv/Dockerfile
+          context: ./rocketmq/rocketmq-namesrv
+          file: ./rocketmq/rocketmq-namesrv/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
