@@ -102,7 +102,7 @@ jobs:
       - name: upload Anchore scan SARIF report
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: ${{ steps.scan_broker.outs.sarif }}
+          sarif_file: broker
 
       - name: scan_namesrv
         uses: anchore/scan-action@v3
