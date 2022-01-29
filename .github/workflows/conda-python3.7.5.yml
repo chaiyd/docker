@@ -86,6 +86,7 @@ jobs:
             chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
           acs-report-enable: true
           fail-build: false
+
       - name: upload Anchore scan SARIF report
         uses: github/codeql-action/upload-sarif@v1
         with:
