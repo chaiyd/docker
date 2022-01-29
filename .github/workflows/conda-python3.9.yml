@@ -1,4 +1,4 @@
-name: Publish Docker image
+name: conda-python-3.9
 
 on:
   push:
