@@ -1,3 +1,3 @@
 #!/bin/sh
 
-bin/mqbroker -n $ROCKETMQ_ADDR
+exec bin/mqbroker -n $ROCKETMQ_ADDR

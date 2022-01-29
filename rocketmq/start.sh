@@ -1,3 +1,3 @@
 #!/bin/sh
 
-bin/mqnamesrv
+exec bin/mqnamesrv

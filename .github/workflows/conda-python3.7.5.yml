@@ -16,6 +16,7 @@ jobs:
     name: Push Docker image to multiple registries
     runs-on: ubuntu-latest
     permissions:
+      security-events: write
       packages: write
       contents: read
     steps:
@@ -69,3 +70,17 @@ jobs:
           tags: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
           labels: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
 
+      - name: Run the Anchore scan action itself with GitHub Advanced Security code scanning integration enabled
+        uses: anchore/scan-action@v3
+        id: scan
+        with:
+          image: |
+            chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
+            chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
+          acs-report-enable: true
+          fail-build: false
+
+      - name: upload Anchore scan SARIF report
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
