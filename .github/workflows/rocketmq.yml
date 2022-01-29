@@ -87,9 +87,9 @@ jobs:
         id: scan
         with:
           image: |
-            chaiyd/rocketmq:${{ env.ROCKETMQ_VER }}
-            chaiyd/rocketmq:broker-${{ env.ROCKETMQ_VER }}
-            chaiyd/rocketmq:namesrv-${{ env.ROCKETMQ_VER }}
+            "chaiyd/rocketmq:${{ env.ROCKETMQ_VER }}"
+            "chaiyd/rocketmq:broker-${{ env.ROCKETMQ_VER }}"
+            "chaiyd/rocketmq:namesrv-${{ env.ROCKETMQ_VER }}"
           acs-report-enable: true
           fail-build: false
 
