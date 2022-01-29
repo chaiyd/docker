@@ -93,7 +93,6 @@ jobs:
 
       - name: scan_broker
         uses: anchore/scan-action@v3
-        id: scan_broker
         with:
           image: |
             chaiyd/rocketmq:broker-${{ env.ROCKETMQ_VER }}
@@ -102,7 +101,6 @@ jobs:
 
       - name: scan_namesrv
         uses: anchore/scan-action@v3
-        id: scan_namesrv
         with:
           image: |
             chaiyd/rocketmq:namesrv-${{ env.ROCKETMQ_VER }}
@@ -115,5 +113,3 @@ jobs:
         with:
           sarif_file: |
             ${{ steps.scan.outputs.sarif }}
-            ${{ steps.scan_broker.outputs.sarif }}
-            ${{ steps.scan_namesrv.outputs.sarif }}
