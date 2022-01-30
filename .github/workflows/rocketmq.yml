@@ -96,13 +96,8 @@ jobs:
         with:
           image: |
             chaiyd/rocketmq:broker-${{ env.ROCKETMQ_VER }}
-          sarif: broker
           acs-report-enable: true
           fail-build: false
-      - name: upload Anchore scan SARIF report
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: broker
 
       - name: scan_namesrv
         uses: anchore/scan-action@v3
