@@ -103,7 +103,6 @@ jobs:
         uses: anchore/scan-action@v3
         with:
           image: chaiyd/rocketmq:namesrv-${{ env.ROCKETMQ_VER }} 
-          image: chaiyd/rocketmq:rocketmq-namesrv-${{ env.ROCKETMQ_VER }}
           acs-report-enable: true
           fail-build: false           
 
