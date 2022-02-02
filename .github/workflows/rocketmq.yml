@@ -89,6 +89,11 @@ jobs:
             chaiyd/rocketmq:${{ env.ROCKETMQ_VER }}
           acs-report-enable: true
           fail-build: false
+      - name: upload Anchore scan SARIF report
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results.sarif
+          category: scan_rocketmq
 
       - name: scan_broker
         uses: anchore/scan-action@v3
@@ -98,13 +103,20 @@ jobs:
             chaiyd/rocketmq:broker-${{ env.ROCKETMQ_VER }}
           acs-report-enable: true
           fail-build: false
+      - name: upload Anchore scan SARIF report
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results.sarif
+          category: scan_broker
 
       - name: scan_namesrv
         uses: anchore/scan-action@v3
         with:
           image: chaiyd/rocketmq:namesrv-${{ env.ROCKETMQ_VER }} 
           acs-report-enable: true
-          fail-build: false           
+          fail-build: false   
+          category: scan_namesrv
+
 
       - name: upload Anchore scan SARIF report
         uses: github/codeql-action/upload-sarif@v1
