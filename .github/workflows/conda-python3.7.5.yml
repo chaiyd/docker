@@ -72,7 +72,6 @@ jobs:
 
       - name: scan cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
         uses: anchore/scan-action@v3
-        # id: scan
         with:
           image: |
             chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
