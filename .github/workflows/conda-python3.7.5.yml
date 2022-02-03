@@ -69,6 +69,9 @@ jobs:
             PYTHON_VER=${{ env.PYTHON_VER }}
           tags: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
           labels: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
+      
+      # clean docker images
+      - run: docker image prune -a -f 
 
       - name: scan cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
         uses: anchore/scan-action@v3
