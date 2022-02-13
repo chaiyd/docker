@@ -84,7 +84,7 @@ docker run -it --rm --name certbot \
             -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
             certbot/certbot certonly \
             --standalone \ 
-            -d  .vl.xyz
+            -d vl.xyz
 ```
 
 ## crontab
