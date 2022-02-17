@@ -5,16 +5,22 @@ FROM ubuntu:${UBUNTU_VER} AS builder
 
 ARG OPENCV_VER=4.5.5
 
+# aliyun mirrors
+#RUN sed -i s/archive.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list && \
+#    sed -i s/security.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list
+
 RUN apt update && \
-    apt install -y wget cmake build-essential pkg-config libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg-dev libswscale-dev libtiff5-dev
+    apt install wget -y
+    #apt install -y wget cmake build-essential pkg-config libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg-dev libswscale-dev libtiff5-dev
 
 RUN wget -c -O opencv-${OPENCV_VER}.tgz "https://github.com/opencv/opencv/archive/refs/tags/${OPENCV_VER}.tar.gz" && \
     tar -zxvf opencv-${OPENCV_VER}.tgz && \
     cd opencv-${OPENCV_VER} && \
     mkdir build && \
     cd build && \
+    CPUNUM=$(cat /proc/cpuinfo |grep processor |wc -l) && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local/opencv -D WITH_GTK=ON -D OPENCV_GENERATE_PKGCONFIG=YES .. && \
-    make -j16 && \
+    make -j${CPUNUM} && \
     make install
 
 FROM nvidia/cuda:${CUDA_VER}-ubuntu${UBUNTU_VER}

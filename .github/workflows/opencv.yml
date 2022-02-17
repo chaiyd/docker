@@ -22,7 +22,10 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
@@ -47,20 +50,22 @@ jobs:
         with:
           context: ./opencv/ubuntu
           file: ./opencv/ubuntu/Dockerfile
+          platforms: linux/amd64,linux/arm64  
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
             UBUNTU_VER=18.04
             CUDA_VER=${{ env.CUDA_VER }}
             OPENCV_VER=${{ env.OPENCV_VER }}
-          tags: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
-          labels: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
+          tags: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
+          labels: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
 
       - name: Build and push Docker images & ubuntu20.04
         uses: docker/build-push-action@v2
         with:
-          context: ./conda/ubuntu
-          file: ./conda/ubuntu/Dockerfile
+          context: ./opencv/ubuntu
+          file: ./opencv/ubuntu/Dockerfile
+          platforms: linux/amd64,linux/arm64  
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
