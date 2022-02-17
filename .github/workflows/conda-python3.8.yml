@@ -70,29 +70,29 @@ jobs:
           tags: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
           labels: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
 
-      - name: scan cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
-        uses: anchore/scan-action@v3
-        with:
-          image: |
-            chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
-          acs-report-enable: true
-          fail-build: false
-      - name: upload Anchore scan SARIF report
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: results.sarif
-          category: cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
-
-      - name: scan cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
-        uses: anchore/scan-action@v3
-        with:
-          image: |
-            chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
-          acs-report-enable: true
-          fail-build: false
-      - name: upload Anchore scan SARIF report
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: results.sarif
-          category: cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
+            #      - name: scan cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
+            #        uses: anchore/scan-action@v3
+            #        with:
+            #          image: |
+            #            chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
+            #          acs-report-enable: true
+            #          fail-build: false
+            #      - name: upload Anchore scan SARIF report
+            #        uses: github/codeql-action/upload-sarif@v1
+            #        with:
+            #          sarif_file: results.sarif
+            #          category: cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
+            #
+            #      - name: scan cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
+            #        uses: anchore/scan-action@v3
+            #        with:
+            #          image: |
+            #            chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
+            #          acs-report-enable: true
+            #          fail-build: false
+            #      - name: upload Anchore scan SARIF report
+            #        uses: github/codeql-action/upload-sarif@v1
+            #        with:
+            #          sarif_file: results.sarif
+            #          category: cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
 
