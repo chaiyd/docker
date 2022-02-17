@@ -10,8 +10,7 @@ ARG OPENCV_VER=4.5.5
 #    sed -i s/security.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list
 
 RUN apt update && \
-    apt install wget -y
-    #apt install -y wget cmake build-essential pkg-config libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg-dev libswscale-dev libtiff5-dev
+    apt install -y wget cmake build-essential pkg-config libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg-dev libswscale-dev libtiff5-dev
 
 RUN wget -c -O opencv-${OPENCV_VER}.tgz "https://github.com/opencv/opencv/archive/refs/tags/${OPENCV_VER}.tar.gz" && \
     tar -zxvf opencv-${OPENCV_VER}.tgz && \
