@@ -1,13 +1,14 @@
 ARG CUDA_VER=11.4.2-cudnn8-devel
 ARG UBUNTU_VER=18.04
-ARG OPENCV_VER=4.5.5
 
 FROM ubuntu:${UBUNTU_VER} AS builder
+
+ARG OPENCV_VER=4.5.5
 
 RUN apt update && \
     apt install -y wget cmake build-essential pkg-config libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg-dev libswscale-dev libtiff5-dev
 
-RUN wget -c -O opencv-${OPENCV_VER}.tgz https://github.com/opencv/opencv/archive/refs/tags/${OPENCV_VER}.tar.gz && \
+RUN wget -c -O opencv-${OPENCV_VER}.tgz "https://github.com/opencv/opencv/archive/refs/tags/${OPENCV_VER}.tar.gz" && \
     tar -zxvf opencv-${OPENCV_VER}.tgz && \
     cd opencv-${OPENCV_VER} && \
     mkdir build && \
