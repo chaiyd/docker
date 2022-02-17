@@ -59,8 +59,8 @@ jobs:
       - name: Build and push Docker images & ubuntu20.04
         uses: docker/build-push-action@v2
         with:
-          context: ./conda/ubuntu20.04
-          file: ./conda/ubuntu20.04/Dockerfile
+          context: ./conda/ubuntu
+          file: ./conda/ubuntu/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
