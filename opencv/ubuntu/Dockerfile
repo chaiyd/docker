@@ -17,9 +17,8 @@ RUN wget -c -O opencv-${OPENCV_VER}.tgz "https://github.com/opencv/opencv/archiv
     cd opencv-${OPENCV_VER} && \
     mkdir build && \
     cd build && \
-    CPUNUM=$(cat /proc/cpuinfo |grep processor |wc -l) && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local/opencv -D WITH_GTK=ON -D OPENCV_GENERATE_PKGCONFIG=YES .. && \
-    make -j${CPUNUM} && \
+    make -j$(nproc) && \
     make install
 
 FROM nvidia/cuda:${CUDA_VER}-ubuntu${UBUNTU_VER}
