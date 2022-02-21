@@ -4,9 +4,9 @@
 - https://hub.docker.com/r/nvidia/cuda
 - 基于cuda-devel
 
-## 组建
+## 组件
 - time zone
   - Asia/Shanghai
-- jupyterlab tensorboard
-- supervisor
+- ~~jupyterlab tensorboard~~
+- ~~supervisor~~
 - opencv 
