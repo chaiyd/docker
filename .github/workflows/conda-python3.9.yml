@@ -58,8 +58,8 @@ jobs:
             PLATFORM=${{ env.PLATFORM }}
             CUDA_VER=${{ env.CUDA_VER }}
             PYTHON_VER=${{ env.PYTHON_VER }}
-          tags: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.MINICONDA_VER }}-ubuntu18.04
-          labels: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.MINICONDA_VER }}-ubuntu18.04
+          tags: chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
+          labels: chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
 
       - name: Build and push Docker images & ubuntu20.04
         uses: docker/build-push-action@v2
@@ -74,8 +74,8 @@ jobs:
             PLATFORM=${{ env.PLATFORM }}
             CUDA_VER=${{ env.CUDA_VER }}
             PYTHON_VER=${{ env.PYTHON_VER }}
-          tags: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.MINICONDA_VER }}-ubuntu20.04
-          labels: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.MINICONDA_VER }}-ubuntu20.04
+          tags: chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
+          labels: chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
 
             #     - name: scan cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
             #       uses: anchore/scan-action@v3

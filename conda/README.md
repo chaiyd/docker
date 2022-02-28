@@ -5,10 +5,7 @@
 - 基于cuda-devel
 
 ## tag
-- chaiyd/conda:cuda11.6.0-devel-py38_4.11.0-ubuntu20.04
-  - cuda-version = cuda11.6.0-devel
-  - conda-bersion = py38_4.11.0 
-
+- chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
 
 ## 组建
 - time zone
