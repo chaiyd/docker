@@ -7,7 +7,7 @@
 ## 组建
 - time zone
   - Asia/Shanghai
-- conda
+- conda ----> miniconda
   - python 
   - cudatoolkit
   - jupyterlab tensorboard opencv-contrib-python

@@ -8,8 +8,11 @@ on:
 
 env:
   CUDA_VER: '11.6.0-devel'
-  CONDA_VER: '2021.11'
-  PYTHON_VER: '3.9'
+    # CONDA_VER: '2021.11'
+    # PYTHON_VER: '3.9'
+  MINICONDA_VER: 'py39_4.11.0'
+  PLATFORM: 'Linux-x86_64'
+   
 
 jobs:
   push_to_registries:
@@ -45,30 +48,34 @@ jobs:
       - name: Build and push Docker images & ubuntu18.04
         uses: docker/build-push-action@v2
         with:
-          context: ./conda/ubuntu18.04
-          file: ./conda/ubuntu18.04/Dockerfile
+          context: ./conda/ubuntu
+          file: ./conda/ubuntu/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
+            BASEIMAGES=ubuntu18.04
+            MINICONDA_VER=${{ env.MINICONDA_VER }}
+            PLATFORM=${{ env.PLATFORM }}
             CUDA_VER=${{ env.CUDA_VER }}
-            CONDA_VER=${{ env.CONDA_VER }}
             PYTHON_VER=${{ env.PYTHON_VER }}
-          tags: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
-          labels: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
+          tags: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.MINICONDA_VER }}-ubuntu18.04
+          labels: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.MINICONDA_VER }}-ubuntu18.04
 
       - name: Build and push Docker images & ubuntu20.04
         uses: docker/build-push-action@v2
         with:
-          context: ./conda/ubuntu20.04
-          file: ./conda/ubuntu20.04/Dockerfile
+          context: ./conda/ubuntu
+          file: ./conda/ubuntu/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
+            BASEIMAGES=ubuntu20.04
+            MINICONDA_VER=${{ env.MINICONDA_VER }}
+            PLATFORM=${{ env.PLATFORM }}
             CUDA_VER=${{ env.CUDA_VER }}
-            CONDA_VER=${{ env.CONDA_VER }}
             PYTHON_VER=${{ env.PYTHON_VER }}
-          tags: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
-          labels: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
+          tags: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.MINICONDA_VER }}-ubuntu20.04
+          labels: chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.MINICONDA_VER }}-ubuntu20.04
 
             #     - name: scan cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
             #       uses: anchore/scan-action@v3
