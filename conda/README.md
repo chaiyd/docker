@@ -6,6 +6,9 @@
 
 ## tag
 - chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
+- CUDA 
+  - VER-devel
+  - VER-cudnn8-devel
 
 ## 组建
 - time zone
