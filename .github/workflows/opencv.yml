@@ -70,7 +70,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
-            UBUNTU_VER=20.04
+            UBUNTU_VER=ubuntu20.04
             CUDA_VER=${{ env.CUDA_VER }}
             DOCKER_HUB=${{ env.DOCKER_HUB }}
             OPENCV_VER=${{ env.OPENCV_VER }}
