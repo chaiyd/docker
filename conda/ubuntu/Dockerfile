@@ -25,7 +25,7 @@ RUN wget -c -O ${MINICONDA} "https://repo.anaconda.com/miniconda/${MINICONDA}" &
     rm -rf ${MINICONDA} && \
     #echo "export PATH=${PATH}:/opt/conda/bin" >> /root/.profile && \
     /opt/conda/bin/conda update -n base -c defaults conda -y && /opt/conda/bin/conda update --all -y && \
-    /opt/conda/bin/conda install python=${PYTHON_VER} pip cudatoolkit -y && \
+    /opt/conda/bin/conda install pip cudatoolkit -y && \
     /opt/conda/bin/conda clean -ya && \
     /opt/conda/bin/python -m pip install --no-cache-dir jupyterlab tensorboard opencv-contrib-python && \
     mkdir -p /root/.jupyter && \
