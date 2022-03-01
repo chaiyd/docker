@@ -27,7 +27,8 @@ RUN wget -c -O ${MINICONDA} "https://repo.anaconda.com/miniconda/${MINICONDA}" &
     /opt/conda/bin/conda update -n base -c defaults conda -y && /opt/conda/bin/conda update --all -y && \
     /opt/conda/bin/conda install python=${PYTHON_VER} pip cudatoolkit -y && \
     /opt/conda/bin/conda clean -ya && \
-    /opt/conda/bin/python -m pip install --no-cache-dir jupyterlab tensorboard opencv-contrib-python
+    /opt/conda/bin/python -m pip install --no-cache-dir jupyterlab tensorboard opencv-contrib-python && \
+    echo "c.FileContentsManager.delete_to_trash = False" >> /root/.jupyter/jupyter_notebook_config.py
 
 ENV PATH $PATH:/opt/conda/bin
 
