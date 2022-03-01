@@ -18,21 +18,11 @@ pkg-config --cflags opencv4
 pkg-config --libs opencv4
 ```
 
-- 新建demo.cpp 文件，代码如下
+- 新建demo.cpp 文件,代码如下
 ```
 #include <iostream>
 #include <opencv2/opencv.hpp>
- 
-using namespace std;
-using namespace cv;
 
-int main()
-{
-    Mat srcImage = imread("opencv.jpg");
-    imshow("Display Image window",srcImage);
-    waitKey(0);
-    return 0;
-}
 ```
 - 同级目录放一张图片，名为opencv.jpg，编译
 ```

@@ -43,6 +43,7 @@ RUN echo "/usr/local/opencv/lib" >> /etc/ld.so.conf.d/opencv.conf
 ENV OPENCV_HOME=/usr/local/opencv
 ENV PKG_CONFIG_PATH=/usr/local/opencv/lib/pkgconfig
 ENV PATH=$OPENCV_HOME/bin:$PKG_CONFIG_PATH:$PATH
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/opencv/lib
 
 ADD supervisor /etc/supervisor/conf.d/
 ADD entrypoint.sh  /usr/local/bin/
