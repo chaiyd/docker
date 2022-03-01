@@ -58,8 +58,8 @@ jobs:
             CUDA_VER=${{ env.CUDA_VER }}
             DOCKER_HUB=${{ env.DOCKER_HUB }}
             OPENCV_VER=${{ env.OPENCV_VER }}
-          tags: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
-          labels: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
+          tags: chaiyd/opencv:${{ env.OPENCV_VER }}-${{ env.CUDA_VER }}-ubuntu18.04
+          labels: chaiyd/opencv:${{ env.OPENCV_VER }}-${{ env.CUDA_VER }}-ubuntu18.04
 
       - name: Build and push Docker images & ubuntu20.04
         uses: docker/build-push-action@v2
@@ -74,8 +74,8 @@ jobs:
             CUDA_VER=${{ env.CUDA_VER }}
             DOCKER_HUB=${{ env.DOCKER_HUB }}
             OPENCV_VER=${{ env.OPENCV_VER }}
-          tags: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
-          labels: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
+          tags: chaiyd/opencv:${{ env.OPENCV_VER }}-${{ env.CUDA_VER }}-ubuntu20.04
+          labels: chaiyd/opencv:${{ env.OPENCV_VER }}-${{ env.CUDA_VER }}-ubuntu20.04
       
             #     # clean docker images
             #      - run: docker image prune -a -f 
