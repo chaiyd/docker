@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  CUDA_VER: '11.0.3-cudnn8-devel'
+  CUDA_VER: '11.5.1-cudnn8-devel'
   # CONDA_VER: '2021.11'
   # PYTHON_VER: '3.8'
   MINICONDA_VER: 'py38_4.11.0'
