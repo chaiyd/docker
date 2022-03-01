@@ -7,8 +7,8 @@ on:
     branches: [ master ]
 
 env:
-  CUDA_VER: '11.5.1-devel'
-  BASEIMAGE: ''
+  DOCKER_HUB: 'chaiyd/conda'
+  CUDA_VER: 'py39_4.11.0-cuda11.3.1-cudnn8-devel'
   OPENCV_VER: '4.5.5'
 
 jobs:
@@ -50,47 +50,49 @@ jobs:
         with:
           context: ./opencv/ubuntu
           file: ./opencv/ubuntu/Dockerfile
-          platforms: linux/amd64,linux/arm64  
+            #platforms: linux/amd64,linux/arm64  
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
-            UBUNTU_VER=18.04
+            UBUNTU_VER=ubuntu18.04
             CUDA_VER=${{ env.CUDA_VER }}
+            DOCKER_HUB=${{ env.DOCKER_HUB }}
             OPENCV_VER=${{ env.OPENCV_VER }}
-          tags: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
-          labels: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
+          tags: chaiyd/opencv:${{ env.OPENCV_VER }}-${{ env.CUDA_VER }}-ubuntu18.04
+          labels: chaiyd/opencv:${{ env.OPENCV_VER }}-${{ env.CUDA_VER }}-ubuntu18.04
 
-            #      - name: Build and push Docker images & ubuntu20.04
-            #        uses: docker/build-push-action@v2
-            #        with:
-            #          context: ./opencv/ubuntu
-            #          file: ./opencv/ubuntu/Dockerfile
-            #          #platforms: linux/amd64,linux/arm64  
-            #          builder: ${{ steps.buildx.outputs.name }}
-            #          push: true
-            #          build-args: |
-            #            UBUNTU_VER=20.04
-            #            CUDA_VER=${{ env.CUDA_VER }}
-            #            OPENCV_VER=${{ env.OPENCV_VER }}
-            #          tags: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
-            #          labels: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
-            #      
-            #      # clean docker images
+      - name: Build and push Docker images & ubuntu20.04
+        uses: docker/build-push-action@v2
+        with:
+          context: ./opencv/ubuntu
+          file: ./opencv/ubuntu/Dockerfile
+          #platforms: linux/amd64,linux/arm64  
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          build-args: |
+            UBUNTU_VER=ubuntu20.04
+            CUDA_VER=${{ env.CUDA_VER }}
+            DOCKER_HUB=${{ env.DOCKER_HUB }}
+            OPENCV_VER=${{ env.OPENCV_VER }}
+          tags: chaiyd/opencv:${{ env.OPENCV_VER }}-${{ env.CUDA_VER }}-ubuntu20.04
+          labels: chaiyd/opencv:${{ env.OPENCV_VER }}-${{ env.CUDA_VER }}-ubuntu20.04
+      
+            #     # clean docker images
             #      - run: docker image prune -a -f 
-
-      - name: scan_ubuntu18.04
-        uses: anchore/scan-action@v3
-        with:
-          image: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
-          acs-report-enable: true
-          fail-build: false
-          category: scan_namesrv
-      - name: upload Anchore scan SARIF report
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: results.sarif
-          category: scan_ubuntu18.04
-
+            #
+            #      - name: scan_ubuntu18.04
+            #        uses: anchore/scan-action@v3
+            #        with:
+            #          image: chaiyd/opencv:${{ env.OPENCV_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
+            #          acs-report-enable: true
+            #          fail-build: false
+            #          category: scan_namesrv
+            #      - name: upload Anchore scan SARIF report
+            #        uses: github/codeql-action/upload-sarif@v1
+            #        with:
+            #          sarif_file: results.sarif
+            #          category: scan_ubuntu18.04
+            #
             #      - run: docker image prune -a -f 
             #      - name: scan_ubuntu20.04
             #        uses: anchore/scan-action@v3
