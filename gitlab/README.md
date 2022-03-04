@@ -18,7 +18,10 @@
    sudo gitlab-rake gitlab:import:repos["/var/opt/gitlab/git-data/repository-import-$(date "+%Y-%m-%d")"]
    
   ```
-   
+
+- gitlab备份
+  `gitlab-rake gitlab:backup:create`
+  
 - git 
   - 删除远程tag
   ```
