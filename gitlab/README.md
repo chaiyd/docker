@@ -20,7 +20,9 @@
   ```
 
 - gitlab备份
-  `gitlab-rake gitlab:backup:create`
+  ```
+   gitlab-rake gitlab:backup:create
+  ```
   
 - git 
   - 删除远程tag
