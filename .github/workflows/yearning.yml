@@ -48,7 +48,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
-            BASEIMAGES=${{ BASEIMAGES }}
+            BASEIMAGES=${{ env.BASEIMAGES }}
             YEARNING_VER=${{ env.YEARNING_VER }}
             YEARNING_URL=${{ env.YEARNING_URL }}
 
