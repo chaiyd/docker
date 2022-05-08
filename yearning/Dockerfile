@@ -1,5 +1,5 @@
-ARG BASEIMAGES=alpine:3.15
-FROM ${BASEIMAGES} AS builder
+ARG BASEIMAGES=3.15
+FROM alpine:${BASEIMAGES} AS builder
 
 LABEL maintainer="chaiyd <chaiyd.cn@gmail.com>"
 
@@ -14,7 +14,7 @@ RUN wget -cO yearning.zip $YEARNING_URL && \
     unzip yearning.zip -d /opt
 
 
-FROM ${BASEIMAGES}
+FROM alpine:${BASEIMAGES}
 
 LABEL maintainer="chaiyd <chaiyd.cn@gmail.com>"
 
