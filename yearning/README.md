@@ -1,7 +1,9 @@
 # yearning
 
 - https://github.com/chaiyd/docker.git
-- 遵循yearning官方,具体查看yearning官方文档
+
+- 已提交至Yearning 仓库
+  - https://github.com/cookieY/Yearning.git
 
 ## yearning官方文档
 - http://yearning.io
