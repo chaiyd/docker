@@ -1,0 +1,83 @@
+name: conda-python-3.9
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CUDA_VER: '11.5.1-cudnn8-devel'
+  # CONDA_VER: '2021.11'
+  # PYTHON_VER: '3.8'
+  MINICONDA_VER: 'py39_4.12.0'
+  PLATFORM: 'Linux-x86_64'
+
+jobs:
+  push_to_registries:
+    name: Push Docker image to multiple registries
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      packages: write
+      contents: read
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            chaiyd/conda
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          driver-opts: network=host
+          
+      - name: Build and push Docker images & ubuntu18.04
+        uses: docker/build-push-action@v2
+        with:
+          context: ./conda/ubuntu
+          file: ./conda/ubuntu/Dockerfile
+            #platforms: linux/amd64,linux/arm64
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          build-args: |
+            BASEIMAGES=ubuntu18.04
+            MINICONDA_VER=${{ env.MINICONDA_VER }}
+            PLATFORM=${{ env.PLATFORM }}
+            CUDA_VER=${{ env.CUDA_VER }}
+            PYTHON_VER=${{ env.PYTHON_VER }}
+          tags: chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
+          labels: chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu18.04
+
+      - name: Build and push Docker images & ubuntu20.04
+        uses: docker/build-push-action@v2
+        with:
+          context: ./conda/ubuntu
+          file: ./conda/ubuntu/Dockerfile
+            #platforms: linux/amd64,linux/arm64
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          build-args: |
+            BASEIMAGES=ubuntu20.04
+            MINICONDA_VER=${{ env.MINICONDA_VER }}
+            PLATFORM=${{ env.PLATFORM }}
+            CUDA_VER=${{ env.CUDA_VER }}
+            PYTHON_VER=${{ env.PYTHON_VER }}
+          tags: chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
+          labels: chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
+

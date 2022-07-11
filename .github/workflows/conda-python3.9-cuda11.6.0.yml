@@ -1,4 +1,4 @@
-name: conda-python-3.7
+name: conda-python-3.9
 
 on:
   push:
@@ -7,10 +7,10 @@ on:
     branches: [ master ]
 
 env:
-  CUDA_VER: '11.2.2-cudnn8-devel'
+  CUDA_VER: '11.6.0-cudnn8-devel'
   # CONDA_VER: '2021.11'
   # PYTHON_VER: '3.8'
-  MINICONDA_VER: 'py37_4.12.0'
+  MINICONDA_VER: 'py39_4.12.0'
   PLATFORM: 'Linux-x86_64'
 
 jobs:
@@ -80,30 +80,4 @@ jobs:
             PYTHON_VER=${{ env.PYTHON_VER }}
           tags: chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
           labels: chaiyd/conda:${{ env.MINICONDA_VER }}-cuda${{ env.CUDA_VER }}-ubuntu20.04
-
-            #      - name: scan cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
-            #        uses: anchore/scan-action@v3
-            #        with:
-            #          image: |
-            #            chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
-            #          acs-report-enable: true
-            #          fail-build: false
-            #      - name: upload Anchore scan SARIF report
-            #        uses: github/codeql-action/upload-sarif@v1
-            #        with:
-            #          sarif_file: results.sarif
-            #          category: cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu18.04
-            #
-            #      - name: scan cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
-            #        uses: anchore/scan-action@v3
-            #        with:
-            #          image: |
-            #            chaiyd/conda:cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
-            #          acs-report-enable: true
-            #          fail-build: false
-            #      - name: upload Anchore scan SARIF report
-            #        uses: github/codeql-action/upload-sarif@v1
-            #        with:
-            #          sarif_file: results.sarif
-            #          category: cuda${{ env.CUDA_VER }}-${{ env.PYTHON_VER }}-ubuntu20.04
 
