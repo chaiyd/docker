@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  ROCKETMQ_VER: '4.9.3'
+  ROCKETMQ_VER: '4.9.4'
 
 jobs:
   push_to_registries:
