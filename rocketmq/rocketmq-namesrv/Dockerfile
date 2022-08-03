@@ -27,8 +27,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone
 
-#COPY --from=builder /opt/$ROCKETMQ_NAME /opt/rocketmq
-COPY --from=builder /opt/rocketmq-${ROCKETMQ_VER} /opt/rocketmq
+COPY --from=builder /opt/$ROCKETMQ_NAME /opt/rocketmq
+#COPY --from=builder /opt/rocketmq-${ROCKETMQ_VER} /opt/rocketmq
 ADD start.sh /opt/rocketmq
 RUN chmod +x /opt/rocketmq/start.sh
 
